@@ -104,7 +104,7 @@
     }
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.1",
+    "@eslint/js": "^10.0.1",
     "@types/node": "^26.6.6",
     "argon2": "^0.43.1",
     "eslint": "^9.39.1",
