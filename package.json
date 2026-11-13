@@ -1,0 +1,117 @@
+{
+  "name": "@papersafeailabs/vault-core",
+  "version": "1.0.0",
+  "description": "The open-source security core of PaperSafeAI: vault encryption formats, key derivation, encrypted backups and sync record sealing.",
+  "license": "Apache-2.0",
+  "author": "PaperSafeAI",
+  "homepage": "https://papersafeai.com/security",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PaperSafeAI/vault-core.git"
+  },
+  "keywords": [
+    "encryption",
+    "aes-gcm",
+    "argon2id",
+    "hkdf",
+    "vault",
+    "offline",
+    "privacy"
+  ],
+  "main": "src/index.js",
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "default": "./src/index.js"
+    },
+    "./crypto/*": {
+      "types": "./types/crypto/*.d.ts",
+      "default": "./src/crypto/*.js"
+    },
+    "./backup": {
+      "types": "./types/backup/index.d.ts",
+      "default": "./src/backup/index.js"
+    },
+    "./sync/catalog/*": {
+      "types": "./types/sync/catalog/*.d.ts",
+      "default": "./src/sync/catalog/*.js"
+    },
+    "./kdf": {
+      "types": "./types/kdf/vault-kdf.d.ts",
+      "default": "./src/kdf/vault-kdf.js"
+    },
+    "./node": {
+      "types": "./types/node/index.d.ts",
+      "default": "./src/node/index.js"
+    },
+    "./pairing/*": {
+      "types": "./types/pairing/*.d.ts",
+      "default": "./src/pairing/*.js"
+    },
+    "./bridge": {
+      "types": "./types/bridge/bridge-crypto.d.mts",
+      "default": "./src/bridge/bridge-crypto.mjs"
+    },
+    "./kdf/auth-record": {
+      "types": "./types/kdf/auth-record.d.ts",
+      "default": "./src/kdf/auth-record.js"
+    },
+    "./platform/react-native": {
+      "types": "./types/platform/react-native.d.ts",
+      "default": "./src/platform/react-native.js"
+    },
+    "./version": {
+      "types": "./types/version.d.ts",
+      "default": "./src/version.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "papersafe-open-backup": "bin/papersafe-open-backup.js"
+  },
+  "files": [
+    "LICENSE",
+    "NOTICE",
+    "SECURITY.md",
+    "SPEC.md",
+    "bin/",
+    "src/",
+    "test-vectors/",
+    "types/",
+    "THREAT_MODEL.md",
+    "AUDIT_SCOPE.md",
+    "INTEGRATION.md"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "vitest run --root .",
+    "release": "node scripts/release.mjs",
+    "vectors": "node scripts/generate-test-vectors.js",
+    "vectors:check": "node scripts/generate-test-vectors.js --check",
+    "types": "node scripts/build-types.js",
+    "types:check": "node scripts/build-types.js --check",
+    "lint": "eslint .",
+    "security:scan": "node scripts/check-secret-scan.mjs"
+  },
+  "peerDependencies": {
+    "argon2": ">=0.31"
+  },
+  "peerDependenciesMeta": {
+    "argon2": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/node": "^26.6.6",
+    "argon2": "^0.43.1",
+    "eslint": "^9.39.1",
+    "fflate": "^0.8.3",
+    "globals": "^17.14.0",
+    "typescript": "^5.9.3",
+    "vitest": "^5.1.0"
+  },
+  "types": "types/index.d.ts"
+}

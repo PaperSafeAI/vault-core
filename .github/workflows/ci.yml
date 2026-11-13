@@ -1,0 +1,73 @@
+name: CI
+
+# Runs in the public vault-core repository on every push and pull request:
+# lint, the tests (including the fuzz suite and the independent vector
+# reader), the test-vector check, and the TypeScript declaration check.
+# Dependencies come from the committed package-lock.json (npm ci).
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [22, 24, 26]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm ci --no-audit --no-fund
+      - run: npm run lint
+      - run: npm test
+      - run: npm run vectors:check
+      - run: npm run types:check
+
+  # Human signoffs must match the author. Only authenticated, GitHub-verified
+  # Dependabot commits can use GitHub's alternative bot signoff identity.
+  dco:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # Execute the base branch's policy, never a contributor's replacement.
+          ref: ${{ github.event.pull_request.base.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+      - name: Verify contributor signoffs and authenticated bot commits
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/check-dco.mjs
+
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+      - uses: ./.github/actions/setup-gitleaks
+      - run: npm run security:scan
+
+  windows-cli-refusal:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+      - run: npm ci --no-audit --no-fund
+      - name: Windows must refuse before reading or extracting
+        run: npm test -- test/open-backup-cli.test.js -t "refuses Windows extraction"

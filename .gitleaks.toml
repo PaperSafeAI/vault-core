@@ -1,0 +1,11 @@
+title = "vault-core secret scan"
+[extend]
+useDefault = true
+
+# Exact synthetic values AND exact fixture paths; never an entire directory.
+[[allowlists]]
+description = "Synthetic vectors and test recovery key; protect no real data"
+condition = "AND"
+regexTarget = "secret"
+paths = ["^(test/auth-record\\.test\\.js|test-vectors/(bridge-v1|vault-core-v1)\\.json)$"]
+regexes = ["^(?:0228d80b5fa44548f1378b4b71e165c22032aa7a72a3041c969a7bf348e652a5|279dd0acebe8d3ac01f88048a27130ee68fa371f27bda573db3a917c3d812fae|3d0fe5c1fd2688e428a35c6873afa3891e60228617caa637d719db25e1843375|53ecfd80beba8d809b766568df5fb7d8ba84b048c19dae14664e6b08e2286999|6ab8b831144ed7aedff2401a34067bfc6c140deefae6ef3fa739ed093efabb7e|8671cb235de65f00dfe86b24f1322b5a4bbf91ed262d1354a554c1ba587f4785|87e1397a99109201fe0defb57b7e74fb760aab5349839e44a71fbf3ecc3752cc|91ea1602559e8f93c1adce01ca6e4042e4628663de7788dec9d06654a2446f81|9627848a2c9f81c624e4649cbde15c37cfb10addeb942afce2442c641cda6526|9742ff7ed63f5189ff0fba0a30ace0ca852a865a0c0408e4eaf05e49e3663bba|A1B2\\-C3D4\\-E5F6\\-0718\\-293A\\-4B5C|MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgNpHjF5r\\+7GWZDOLCfsbb9L2ZjzV2RIJItcCWzssz/jehRANCAARiqV\\+DhwJoXHDyPSIKCq2AikkKBnJJLleXUCs3bjM0DDBaJdGwehVKZuOg3QyB5F2Q42A7yg/mMe4ebqH0b1ms|MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgQnHZ7O/R/Xg9W6SAJPBLbLPqG8S6pNunMWqSV\\+71t8uhRANCAATB0fo\\+R1HwNql1k09oskKD1/BhpcS/zdlP827S2N2JNuSZ60mF2IBORGFsgaTs4afzx37wmz4u\\+U7\\+0JnYzk3v|UFFSU1RVVldYWVpbXF1eXw==|ab992defaeaa051d23c8d1f5b1fc3499ff8946bd9322af320c946a565c996928|bc4fbdddfd46d141f1d17d827275b1d31615e60a54ac56b02e9c5972c642f195|bddc7ddac89dc8b706d462c87a20fad00ead01f2e0f1cc446794ffb55ad7a04a)$"]

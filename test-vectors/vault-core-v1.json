@@ -1,0 +1,179 @@
+{
+  "description": "PaperSafeAI vault-core test vectors. TEST KEYS ONLY. See SPEC.md for each format.",
+  "version": 1,
+  "vaultKeyHex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+  "vaultId": "vault-test-0001",
+  "passwordKdf": {
+    "spec": "SPEC.md §2",
+    "scheme": "argon2id-v1",
+    "params": {
+      "kdf": "argon2id",
+      "timeCost": 3,
+      "memoryCost": 65536,
+      "parallelism": 1,
+      "hashLength": 32
+    }
+  },
+  "vaultUnlock": {
+    "spec": "SPEC.md §2",
+    "authRecord": {
+      "kdfScheme": "argon2id-v1",
+      "passwordSalt": "UFFSU1RVVldYWVpbXF1eXw==",
+      "wrappedVaultKeyByPassword": {
+        "encrypted": "+q9bgYNAYCzS5MtH/fO0uK5M5cOfR3+YOBjk3Ila0AQ=",
+        "iv": "d4zvX9oRWf07p9Cj",
+        "tag": "qaGO4heU1kEMVn5MNRqSCg=="
+      }
+    },
+    "password": "correct horse battery staple",
+    "wrappingKeyHex": "91ea1602559e8f93c1adce01ca6e4042e4628663de7788dec9d06654a2446f81"
+  },
+  "biometricWrap": {
+    "spec": "SPEC.md §2",
+    "hardwareSecretHex": "6162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f80",
+    "blob": {
+      "version": 1,
+      "provider": "test",
+      "challenge": "WGrLwlPg4ogzi/XLZdUyU6ucy/CC5PamW5GMTj0cDFE=",
+      "salt": "AVen9RegH5wwn/TtuD+taSKRR31AMt9qKgIlChgFCME=",
+      "iv": "qurxZuQOQXMei6zs",
+      "tag": "Tg+DnikGwYq0w4VjpVibcg==",
+      "ciphertext": "y2pVJgla6k5YfljcfFLYyocwELtR9H6Jjfhn4rmibGo="
+    }
+  },
+  "databaseKey": {
+    "spec": "SPEC.md §3",
+    "salt": "papersafeai:db-key",
+    "info": "papersafeai:db-key:v1",
+    "keyHex": "279dd0acebe8d3ac01f88048a27130ee68fa371f27bda573db3a917c3d812fae"
+  },
+  "databaseField": {
+    "spec": "SPEC.md §3",
+    "fieldKeyHex": "87e1397a99109201fe0defb57b7e74fb760aab5349839e44a71fbf3ecc3752cc",
+    "context": {
+      "vaultId": "vault-test-0001",
+      "recordType": "example_column",
+      "primaryKey": [
+        "doc-1"
+      ]
+    },
+    "plaintext": "Passport number X1234567",
+    "stored": "\u0000pse\u0003SlYfE/u246rnQ8xq.so6yBxhtG8Ax31Ml+on5Ig==.tFJ8LUueMCtIgMsV6f9N+AXbfPO2ft1a"
+  },
+  "credentialOpenHalf": {
+    "spec": "SPEC.md §4",
+    "hkdfSalt": "papersafeai:local-vault",
+    "hkdfInfo": "papersafeai:credentials:v1",
+    "keyHex": "9742ff7ed63f5189ff0fba0a30ace0ca852a865a0c0408e4eaf05e49e3663bba",
+    "itemId": "item-1",
+    "half": "open",
+    "aad": "{\"component\":\"vault-v3\",\"part\":\"open\",\"primaryKey\":[\"item-1\"],\"recordType\":\"credential\",\"vaultId\":\"vault-test-0001\"}",
+    "plaintext": "{\"username\":\"alice@example.com\",\"url\":\"https://example.com\"}",
+    "ivHex": "0349fcfecea6c391987402ffea",
+    "ciphertextHex": "d8f3aa3ec384a0dec52d0ceaca43caa322e48e31f89c536601c97533f518d2a98500f161152335e9dd5c05c7c5aab6f84b02632ddf117d21ae3d9781",
+    "tagHex": "4c274e05b603476199e360b4e9278090"
+  },
+  "credentialDigests": {
+    "spec": "SPEC.md §4",
+    "openKeyHex": "9742ff7ed63f5189ff0fba0a30ace0ca852a865a0c0408e4eaf05e49e3663bba",
+    "reuseLabel": "papersafeai:credentials:reuse-digest",
+    "noteIndexLabel": "papersafeai:credentials:note-index",
+    "password": "hunter2-but-longer",
+    "passwordDigest": "ab992defaeaa051d23c8d1f5b1fc3499ff8946bd9322af320c946a565c996928",
+    "noteToken": "Locker",
+    "noteTokenDigest": "f514ee5ca825"
+  },
+  "documentKey": {
+    "spec": "SPEC.md §5",
+    "documentId": "doc-1",
+    "wrapKeySalt": "papersafeai:local-vault",
+    "wrapKeyInfo": "papersafeai:document-key-wrap:v3",
+    "aad": "{\"component\":\"vault-v3\",\"primaryKey\":[\"doc-1\"],\"recordType\":\"document_key\",\"vaultId\":\"vault-test-0001\"}",
+    "dekHex": "a0a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babbbcbdbebf",
+    "wrappedBase64": "AweH6W35eWCHT0FtcCTZ6rG8rXOR7NjQV1T9+8S38np5MXyIOVEEluGcOVtTxXs7I6BLLeqbKCVej36oIA=="
+  },
+  "catalogRecord": {
+    "spec": "SPEC.md §7",
+    "hkdfSalt": "papersafe/catalogue",
+    "keys": {
+      "nameIndex": {
+        "info": "name-index/v1",
+        "keyHex": "9627848a2c9f81c624e4649cbde15c37cfb10addeb942afce2442c641cda6526"
+      },
+      "payload": {
+        "info": "payload/v1",
+        "keyHex": "bc4fbdddfd46d141f1d17d827275b1d31615e60a54ac56b02e9c5972c642f195"
+      },
+      "digest": {
+        "info": "receipt-digest/v1",
+        "keyHex": "bddc7ddac89dc8b706d462c87a20fad00ead01f2e0f1cc446794ffb55ad7a04a"
+      }
+    },
+    "context": {
+      "vaultId": "vault-test-0001",
+      "recordType": "record",
+      "primaryKey": [
+        "record-1"
+      ]
+    },
+    "value": {
+      "name": "Taxes",
+      "parent": null
+    },
+    "envelopeHex": "01d264220ccb18d3bb45116fcc77d77a00d18d469168d5094111c1ab00a66de1076b52f91d98dc0f04fd9e12d61471406c07bd29aa0e7bc4220815"
+  },
+  "pairingTransport": {
+    "spec": "SPEC.md §8",
+    "pairingSecretHex": "202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f",
+    "transportKeyInfo": "papersafe-transport-v2",
+    "transportKeyHex": "3d0fe5c1fd2688e428a35c6873afa3891e60228617caa637d719db25e1843375",
+    "fingerprintInfo": "papersafe-fp-v1",
+    "fingerprint": "6c2bebedbff68cc1e607c9a9acfaee2f",
+    "body": "{\"items\":[]}",
+    "sealedBodyHex": "7984f173733e98ae9c6da9e483b8fb0340eaa378e5f18ad5d43c0fb5b6d3d7bd3ce9f545ae3fb741",
+    "request": {
+      "method": "POST",
+      "target": "/organization/tags?x=1",
+      "deviceId": "device-1"
+    },
+    "authorization": "PapersafeHMAC ts=1790812800,nonce=8a8ba9f992ce3db1553c0236771594c8,sig=83e5cbfa411dcf632ddd252546898e6b7fb289d357aecc6448909f00dbe4c3fb,id=device-1,inst=install-1",
+    "responseBindingAad": "psai-resp-v1\nPOST\n/organization/tags?x=1\n8a8ba9f992ce3db1553c0236771594c8",
+    "boundAnswer": "{\"ok\":true}",
+    "boundAnswerHex": "7ab73d96bdc3d061fd46700c80d07b88c704a05164338cfe3aa979798a50b45d0025819f43bdf9"
+  },
+  "pairingSession": {
+    "spec": "SPEC.md §8 (sync sessions)",
+    "pairingSecretHex": "202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f",
+    "fingerprint": "6c2bebedbff68cc1e607c9a9acfaee2f",
+    "deviceId": "device-1",
+    "phonePrivateHex": "77076d0a7318a57d3c16c17251b26645df4c2f87ebc0992ab177fba51db92c2a",
+    "phonePublicHex": "8520f0098930a754748b7ddcb43ef75a0dbf3a0d26381af4eba4a98eaa9b4e6a",
+    "desktopPrivateHex": "5dab087e624a8a4b79e17f8b83800ee66f3bb1292618b6fd1c2f8b27ff88e0eb",
+    "desktopPublicHex": "de9edb7d7b7dc1b4d35b61c2ece435373f8343c85b78674dadfc7e146f882b4f",
+    "sessionIdHex": "c0c1c2c3c4c5c6c7c8c9cacbcccdcecf",
+    "openRequest": "{\"v\":1,\"pub\":\"8520f0098930a754748b7ddcb43ef75a0dbf3a0d26381af4eba4a98eaa9b4e6a\"}",
+    "openAnswer": "{\"v\":1,\"id\":\"c0c1c2c3c4c5c6c7c8c9cacbcccdcecf\",\"pub\":\"de9edb7d7b7dc1b4d35b61c2ece435373f8343c85b78674dadfc7e146f882b4f\",\"expiresIn\":3600}",
+    "phoneToDesktopKeyHex": "8671cb235de65f00dfe86b24f1322b5a4bbf91ed262d1354a554c1ba587f4785",
+    "desktopToPhoneKeyHex": "6ab8b831144ed7aedff2401a34067bfc6c140deefae6ef3fa739ed093efabb7e",
+    "requestBody": "{\"items\":[\"secret\"]}",
+    "sealedRequestHex": "e88a487200c242ee20a36285bb7253652dd71cdc0de69b8ca6364b336bc706a2d1c1101585933e7ff6ec4b09dd7011d3",
+    "answer": {
+      "method": "POST",
+      "target": "/organization/tags",
+      "nonce": "00112233445566778899aabbccddeeff",
+      "body": "{\"ok\":true}"
+    },
+    "sealedAnswerHex": "4f30161f68bbab1cbdd98daa635c1f208c4de6c994e2c5856cc98a25c5168ce2a2647b1b94df0f",
+    "identity": {
+      "spec": "SPEC.md §8 (sync sessions, version 2)",
+      "phoneIdentityPrivateHex": "a8abababababababababababababababababababababababababababababab6b",
+      "phoneIdentityPublicHex": "e3712d851a0e5d79b831c5e34ab22b41a198171de209b8b8faca23a11c624859",
+      "desktopIdentityPrivateHex": "c8cdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcdcd4d",
+      "desktopIdentityPublicHex": "b5bea823d9c9ff576091c54b7c596c0ae296884f0e150290e88455d7fba6126f",
+      "openRequest": "{\"v\":2,\"pub\":\"8520f0098930a754748b7ddcb43ef75a0dbf3a0d26381af4eba4a98eaa9b4e6a\",\"spk\":\"e3712d851a0e5d79b831c5e34ab22b41a198171de209b8b8faca23a11c624859\"}",
+      "openAnswer": "{\"v\":2,\"id\":\"c0c1c2c3c4c5c6c7c8c9cacbcccdcecf\",\"pub\":\"de9edb7d7b7dc1b4d35b61c2ece435373f8343c85b78674dadfc7e146f882b4f\",\"spk\":\"b5bea823d9c9ff576091c54b7c596c0ae296884f0e150290e88455d7fba6126f\",\"expiresIn\":3600}",
+      "phoneToDesktopKeyHex": "53ecfd80beba8d809b766568df5fb7d8ba84b048c19dae14664e6b08e2286999",
+      "desktopToPhoneKeyHex": "0228d80b5fa44548f1378b4b71e165c22032aa7a72a3041c969a7bf348e652a5"
+    }
+  }
+}

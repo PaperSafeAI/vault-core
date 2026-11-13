@@ -1,0 +1,26 @@
+{
+  "description": "PaperSafeAI browser bridge test vector. TEST KEYS ONLY. See SPEC.md §9.",
+  "protocol": "papersafeai-bridge-v1",
+  "extension": {
+    "publicKey": "BMHR+j5HUfA2qXWTT2iyQoPX8GGlxL/N2U/zbtLY3Yk25JnrSYXYgE5EYWyBpOzhp/PHfvCbPi75Tv7QmdjOTe8=",
+    "privateKeyPkcs8": "MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgQnHZ7O/R/Xg9W6SAJPBLbLPqG8S6pNunMWqSV+71t8uhRANCAATB0fo+R1HwNql1k09oskKD1/BhpcS/zdlP827S2N2JNuSZ60mF2IBORGFsgaTs4afzx37wmz4u+U7+0JnYzk3v",
+    "fingerprint": "196ea4e6573a7fa5f2e7b446da54072bfbae2ec44a744dd9f46cc60fd5a1a169"
+  },
+  "desktop": {
+    "publicKey": "BGKpX4OHAmhccPI9IgoKrYCKSQoGckkuV5dQKzduMzQMMFol0bB6FUpm46DdDIHkXZDjYDvKD+Yx7h5uofRvWaw=",
+    "privateKeyPkcs8": "MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgNpHjF5r+7GWZDOLCfsbb9L2ZjzV2RIJItcCWzssz/jehRANCAARiqV+DhwJoXHDyPSIKCq2AikkKBnJJLleXUCs3bjM0DDBaJdGwehVKZuOg3QyB5F2Q42A7yg/mMe4ebqH0b1ms"
+  },
+  "clientNonce": "+swZK1TV1ILhEoW4LslAwTY17QlXeDS+EQ37MjbY9eA=",
+  "serverNonce": "yoZn0YGhNw5sTDfPIRw4sDMqurQ19mJApbCVWUTnmYI=",
+  "frame": {
+    "direction": "c2s",
+    "t": "enc",
+    "seq": 1,
+    "iv": "zAoIYq+ONiBfmT3Q",
+    "ct": "WqWyxDMc2IAAD3ffJObnbGsJxk34hPmcjwrt0eYcvTcv8pEpgNwqrgIKHwMPNhpUVjcPlH2u6PiKNUp8KjijUlBIkS1SdJpLdqd8hChvIROFhJe3L4OsxRyM7hazbiDZMj3tMHd0"
+  },
+  "payload": {
+    "type": "detect-fields",
+    "origin": "https://example.com"
+  }
+}

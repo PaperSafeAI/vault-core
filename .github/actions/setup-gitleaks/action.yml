@@ -1,0 +1,20 @@
+name: Set up verified gitleaks
+description: Install the pinned Linux scanner after verifying its release checksum.
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      env:
+        GITLEAKS_VERSION: 8.28.0
+      run: |
+        set -euo pipefail
+        install_dir="$RUNNER_TEMP/vault-core-gitleaks"
+        mkdir -p "$install_dir"
+        cd "$install_dir"
+        base="https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}"
+        tarball="gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
+        curl --retry 3 -sSfLO "$base/$tarball"
+        curl --retry 3 -sSfLO "$base/gitleaks_${GITLEAKS_VERSION}_checksums.txt"
+        grep " $tarball\$" "gitleaks_${GITLEAKS_VERSION}_checksums.txt" | sha256sum -c -
+        tar xzf "$tarball" gitleaks
+        echo "$install_dir" >> "$GITHUB_PATH"
