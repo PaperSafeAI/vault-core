@@ -13,11 +13,17 @@ SPEC.md and THREAT_MODEL.md before adopting it.
 | PaperSafeAI app branch `niskumar/vault` | The closed-source app's integration with the library. It is not a public SDK or a dependency for your application. |
 | `PaperSafeAI/vault-core-old` | Private historical archive. Not a dependency or part of the public distribution. |
 
-Publication status at preparation time (2026-11-12): the fresh repository is
-private and the npm package has not been published. Do not assume a public
-clone or registry installation works until the release is announced. Authorized
-source consumers can use the checked-out package now; once published, use its
-reviewed release/tag and the `@papersafeailabs/vault-core` package name.
+Source release status (2026-11-13): use a clone or the reviewed source commit
+below. The npm package has not been published yet; the registry release and
+its provenance are a separate step.
+
+```sh
+npm install git+https://github.com/PaperSafeAI/vault-core.git#8284ba899e3d60276f729e873fb7469ee01f874b argon2
+```
+
+Use the public `@papersafeailabs/vault-core` entry points after installation;
+the package name is unchanged by installing from Git. A public source release
+is not an independent cryptographic audit or a reproducible app-build claim.
 
 ## What you can reuse
 

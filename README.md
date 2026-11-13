@@ -3,11 +3,22 @@
 The open-source security core of [PaperSafeAI](https://papersafeai.com): the
 code that decides how your documents, passwords and backups are encrypted.
 
-PaperSafeAI keeps your documents on your own devices, encrypted, and works
-without an internet connection (the one opt-in exception, phone cloud reading,
-is spelled out in [SPEC.md §10](SPEC.md#10-network-behaviour)).
-This package is the code that does the encrypting, published under the Apache
-2.0 licence so that you and others can check it.
+PaperSafeAI encrypts the vault data it stores on your devices. Desktop reading
+runs locally; model setup, updates, licence checks and optional phone Cloud
+reading have their own network requirements. This package implements the
+cryptographic formats, not the app's licensing or cloud services. See
+[SPEC.md §10](SPEC.md#10-network-behaviour).
+
+**Source release:** the npm package has not been published yet. You can clone
+this repository or install the reviewed source revision directly (Node.js 22+):
+
+```sh
+npm install git+https://github.com/PaperSafeAI/vault-core.git#8284ba899e3d60276f729e873fb7469ee01f874b argon2
+```
+
+The `@papersafeailabs/vault-core` registry name is reserved for the separate npm
+release; do not assume a registry installation is available yet. The source is
+provided under Apache-2.0 so developers can inspect and integrate it.
 
 ### What publishing this proves, and what it does not
 
@@ -18,8 +29,8 @@ This package is the code that does the encrypting, published under the Apache
   but this package and your passphrase.
 - **It does not prove that a given app build runs this code.** The PaperSafeAI
   apps themselves are not open source, and their builds are not reproducible.
-  We publish this package from the same source the apps are built from, and
-  publish it to npm with provenance, but you are trusting us that the app you
+  The package contains the shared source used by the app integration. The
+  planned npm release will include provenance, but you are trusting us that the app you
   installed was built from it. Each app names the core version it bundles
   (desktop: Settings › This Computer; phone: About), so you know which release
   to read.
@@ -141,7 +152,7 @@ npm run types:check      # the declarations match src/ and compile strictly
 A PaperSafeAI backup can be opened without the app, offline:
 
 ```sh
-npm install -g @papersafeailabs/vault-core argon2
+npm install -g git+https://github.com/PaperSafeAI/vault-core.git#8284ba899e3d60276f729e873fb7469ee01f874b argon2
 PAPERSAFE_BACKUP_PASSPHRASE='…' papersafe-open-backup my-vault.psbak ./restored
 ```
 
